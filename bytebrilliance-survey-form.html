@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteBrilliance Survey Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Root variables */
+        :root {
+            --primary-color: #4285F4;
+            --accent-color: #34A853;
+            --text-color: #333;
+            --bg-color: #FAFAFA;
+            --input-bg-color: #F1F3F4;
+            --button-hover: #0F9D58;
+            --modal-bg-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Form container */
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        form {
+            display: grid;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--input-bg-color);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+        }
+
+        /* Modal styling */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-bg-color);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .modal button {
+            background-color: var(--accent-color);
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ByteBrilliance User Survey</h1>
+        <form id="survey-form">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="18" max="120" required>
+            </div>
+
+            <div>
+                <label for="role">What best describes your current role?</label>
+                <select id="role" name="role" required>
+                    <option value="">Select an option</option>
+                    <option value="student">Student</option>
+                    <option value="professional">IT Professional</option>
+                    <option value="manager">Manager</option>
+                    <option value="educator">Educator</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <button type="submit">Submit Survey</button>
+        </form>
+    </div>
+
+    <!-- Modal for submission message -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <h2 id="modal-message"></h2>
+            <button id="close-modal">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('survey-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            document.getElementById('modal-message').innerText = `Thank you for submitting the survey, ${name}!`;
+            document.getElementById('modal-overlay').style.display = 'flex';
+        });
+
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('modal-overlay').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
